@@ -331,18 +331,18 @@ QuestDB.
 | cairo.writer.misc.append.page.size             | 4k                | mmap page size for mapping small files, default value is OS page size (4k Linux, 64K windows, 16k OSX M1). Overriding this rounds to the nearest (greater) multiple of the OS page size.                                 |
 | cairo.writer.data.index.key.append.page.size   | 512k              | mmap page size for appending index key data; key data is number of distinct symbol values times 4 bytes.                                                                                                                 |
 
-
 ### Parallel SQL execution
 
-This section describes settings that can affect parallelism level of SQL execution and therefore performance.
+This section describes settings that can affect parallelism level of SQL
+execution and therefore performance.
 
-| Property                                 | Default | Description                                                                                                                  |
-|------------------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------|
-| cairo.page.frame.dispatch.queue.capacity | 64      | Dispatch queue should be large enough to process multiple concurrent SQL statements.                                         |
-| cairo.page.frame.shard.count             | 16      | Shard reduce queue contention between SQL statements that are executed concurrently.                                         |
-| cairo.page.frame.reduce.queue.capacity   | 256     | Reduce queue is used for data processing and should be large enough to supply tasks for worker threads (shared worked pool). |
-| cairo.page.frame.rowid.list.capacity     | 256     | RowId list capacity for each slot of the "reduce" queue. Larger values reduce memory allocation rate, but increase RSS size. |
-
+| Property                                 | Default | Description                                                                                                                                                                |
+| ---------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| cairo.page.frame.dispatch.queue.capacity | 64      | Dispatch queue is used to initiate data processing and should be large enough to process multiple concurrent SQL statements.                                               |
+| cairo.page.frame.shard.count             | 16      | Number of shards for both dispatch and reduce queues. Shards reduce queue contention between SQL statements that are executed concurrently.                                |
+| cairo.page.frame.reduce.queue.capacity   | 256     | Reduce queue is used for data processing and should be large enough to supply tasks for worker threads (shared worked pool).                                               |
+| cairo.page.frame.rowid.list.capacity     | 256     | Row ID list initial capacity for each slot of the reduce queue. Larger values reduce memory allocation rate, but increase minimal RSS size.                                |
+| cairo.page.frame.column.list.capacity    | 16      | Column list capacity for each slot of the reduce queue. Used by JIT-compiled filter functions. Larger values reduce memory allocation rate, but increase minimal RSS size. |
 
 ### Postgres wire protocol
 
