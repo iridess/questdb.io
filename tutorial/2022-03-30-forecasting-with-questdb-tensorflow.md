@@ -1,0 +1,539 @@
+---
+title: Time Series Forecasting with TensorFlow and QuestDB
+author: Gourav Singh Bais
+description:
+  Timeseries is a type of data used to train machine learning models. You may
+  have numerical data for predicting housing prices or classification data for
+  categorizing dog and cat breeds. It's also the special type of data used for
+  training machine learning algorithms where time is the crucial component.
+image: /img/tutorial/2022-03-30/banner.png
+featureType: resource
+---
+
+<Banner alt="Grafana logo, QuestDB logo, Bitcoin logo" height={467}
+src="/img/tutorial/2022-03-30/banner.png" width={650}>
+
+</Banner>
+
+This post comes Gourav Singh Bais, who has written an excellent tutorial that
+shows how to build an application that uses time series data to forecast trends
+and events using Tensorflow and QuestDB. Thanks for the submission!
+
+## Machine Learning for Timeseries Forecasting
+
+Machine learning and deep learning are taking the world by storm, performing
+many tasks with human-like accuracy. In the medical field, there are now smart
+assistants that can check your health over time. In finance, there are tools
+that can predict the return on your investment with a reasonable degree of
+accuracy. In online marketing, there are product recommenders that suggest
+specific products and brands based on your purchase history.
+
+In each of these fields, a different type of data is used to train machine
+learning models. You may have numerical data for predicting housing prices or
+classification data for categorizing dog and cat breeds. Nowadays, a special
+type of data is used for training machine learning algorithms where time is the
+crucial component. This type of data is referred to as _time series data_.
+
+Time series data is complex and involves time-dependent features that go beyond
+the scope of what traditional machine learning algorithms like Regression,
+Classification, and Clustering are useful for. So what can you do if traditional
+algorithms are useless? Thankfully, **time series forecasting** has the
+solution. _Time series forecasting_ is the process of analyzing time-dependent
+data with the help of statistics and mathematics and making strategic decisions
+and predictions from that data. Predictions made using time series forecasting
+may not be wholly precise due to the variable nature of time, but they do
+provide reasonable approximations that are applicable in a variety of fields.
+Let’s consider a few use cases:
+
+- **Predictive maintenance:** nowadays, IoT (internet of things), AI (artificial
+  intelligence), and integrated systems are being embedded into electronic,
+  mechanical, and other types of devices to make them smart (i.e., they can work
+  without or with only a low level of human interaction). These IoT devices keep
+  track of data over time, and artificial intelligence, of which time series
+  forecasting is a component, is used to analyze this data and make predictions
+  regarding the approximate time at which devices may need maintenance. The
+  “check engine” light in your car is a great example of this: your car’s
+  computer continuously monitors the engine, and if it finds any suspicious
+  signals, it alerts you for repairs.
+
+- **Anomaly detection:** _anomaly detection_ is the process of detecting the
+  rare events and observations in the functionality of systems. Identifying
+  these events can be rather challenging, but time series forecasting helps by
+  providing smart elements that can monitor things continuously. Cyber security,
+  health monitoring, and fraud detection in FinTech are a few examples of
+  systems that make use of time series analysis for anomaly detection. For
+  instance, smartwatches and other smart devices are used to track and monitor a
+  person’s health, and if anomalies are discovered by the device’s algorithms, a
+  doctor can be notified.
+
+- **IoT data:**
+  [internet of things](oracle.com/in/internet-of-things/what-is-iot/) is now
+  becoming a concrete pillar of our economy. IoT devices have the ability to
+  store data on a timely basis and communicate it across other devices for
+  analysis and forecasting. One example of this is temperature prediction, in
+  which different IoT devices are used to regularly store temperature data,
+  while forecasting is then used to make weather-related predictions and
+  decisions.
+
+- **Autoscaling decisions:** businesses and solutions are created to meet the
+  needs of specific people or products, but when demand grows quickly, they may
+  or may not be able to keep up. However, with time series forecasting,
+  businesses can better monitor the demand for their products or solutions over
+  time and anticipate future demand in time to scale their services accordingly.
+
+- **Trading:** stock markets provide an excellent example of time-dependent
+  features. Every day when the stock market opens and closes, entries are made
+  for fluctuations in seconds. A variety of databases and file storage systems
+  are used to store all of this information, and different time series
+  forecasting algorithms can then be used to make price forecasts for the
+  upcoming day, week, or even month.
+
+In this article, you will learn more about using deep learning algorithms to
+accomplish time series forecasting and build an application that uses time
+series data to forecast trends and events using
+[TensorFlow](https://www.tensorflow.org/) and [QuestDB](https://questdb.io/).
+
+## TensorFlow and QuestDB
+
+Time series forecasting can be carried out with two different types of
+algorithms: machine learning and deep learning. _Machine learning_ uses methods
+like
+[ARIMA](https://machinelearningmastery.com/arima-for-time-series-forecasting-with-python/),
+[ETS](https://ai.plainenglish.io/time-series-decomposition-ets-model-using-python-4d2cd04bab77),
+and
+[Simple Exponential Smoothing](https://machinelearningmastery.com/exponential-smoothing-for-time-series-forecasting-in-python/#:~:text=Single%20Exponential%20Smoothing%2C%20SES%20for,smoothing%20factor%20or%20smoothing%20coefficient.)
+for forecasting, while _deep learning_ uses neural networks such as
+[Recurrent Neural Network (RNN)](https://towardsdatascience.com/temporal-loops-intro-to-recurrent-neural-networks-for-time-series-forecasting-in-python-b0398963dc1f),
+which has a few variations itself (e.g.,
+[LSTM](https://machinelearningmastery.com/time-series-prediction-lstm-recurrent-neural-networks-python-keras/)
+and
+[GRU](https://towardsdatascience.com/predictive-analytics-time-series-forecasting-with-gru-and-bilstm-in-tensorflow-87588c852915)),
+depending on the type of data being used. Implementing these deep learning
+algorithms is made easier with the use of Google’s
+[TensorFlow](https://www.tensorflow.org/) library, which supports all kinds of
+neural networks and deep learning algorithms.
+
+The heart of any algorithm is the data, and that’s no different for time series
+forecasting. Many use cases generate vast amounts of data that needs to be
+securely stored and easily accessible. In many databases, older entries are
+replaced by new entries, which can create issues for analysis. Enter **Time
+Series Databases** (TSDBs), which are suitable storage options where data needs
+to be appended in batches rather than in regular updates. They provide
+[a lot more features](https://questdb.io/blog/2020/11/26/why-timeseries-data/)
+for storing time series data as compared to traditional databases. One choice
+for the TSDB is [_QuestDB_](https://questdb.io/), an open source time series
+database with a focus on fast performance and ease of use. Some factors that
+make QuestDB a better choice over other TSDBs include the following:
+
+- It reduces hardware and development costs.
+- It is cloud-native.
+- It is an on-premises database.
+
+## Implementing Predictive Data Analysis
+
+Now that you have a deeper awareness of time series data and time series
+analysis, let’s dive into a practical implementation by building an application
+to use this data for forecasting trends. This tutorial will use the historical
+exchange rate of USD to the INR data set, which you can download
+[here](https://excelrates.com/historical-exchange-rates/USD-INR) in Excel
+format. Make sure you select the time span between 1999-2022. This data set
+contains three columns:
+
+1. **Date:** time component according to which other components vary.
+2. **USD:** price of USD at a specific date.
+3. **INR:** price of INR concerning both USD and Date columns.
+
+As you have read, there are many different options for time series forecasting
+(e.g., ARIMA, ETS, Simple Exponential Smoothing, RNNs, LSTMs, GRUs, etc.). This
+article will focus on the deep learning solution—using neural networks to
+accomplish time series forecasting. Using RNNs for a small amount of data can
+cause an issue called
+[vanishing gradient](https://en.wikipedia.org/wiki/Vanishing_gradient_problem).
+Because of this reason, LSTMs and GRUs were introduced. Due to its architectural
+simplicity, GRU is the best option for the small amount of data you’ll be using
+in this tutorial.
+
+Let’s get started!
+
+### Installing TensorFlow
+
+TensorFlow can be easily installed with a Python package manager (PIP). If you
+have [Anaconda](https://www.anaconda.com/) installed in your system, you can use
+the Anaconda prompt. For normal Python installation, you can use the default
+command prompt and write the following command to install TensorFlow:
+
+```
+pip install tensorflow
+```
+
+Be sure to use Python 3.6 for best compatibility with TensorFlow 1.15 (as well
+as later versions).
+
+### Installing QuestDB
+
+To install QuestDB on any OS platform, you’ll need to:
+
+1. [Install Docker](https://docs.docker.com/engine/install/)
+
+2. Pull the QuestDB Docker image and create a Docker container. Open your
+   command prompt and write the following command:
+
+   ```
+   docker run -p 9000:9000 -p 8812:8812 questdb/questdb
+   ```
+
+Here, 9000 is the port on which QuestDB will run, and port 8812 is for the
+Postgres wire protocol.
+
+3. Open another terminal and run the following command to check whether QuestDB
+   is running or not:
+
+   ```
+   docker ps
+   ```
+
+Alternatively, you can browse **localhost:9000**, and QuestDB should be
+accessible there.
+
+### Importing Your Dependencies
+
+Now that your dependencies are installed, it’s time to start implementing the
+time series forecasting with TensorFlow and QuestDB. If you want to clone the
+project and follow along in your own [Jupyter](https://jupyter.org/) notebook,
+[here is the link](https://github.com/gouravsinghbais/Time-Series-Forecasting-with-Tensorflow-and-QuestDB)
+to the GitHub repo. First, import the following dependencies:
+
+```
+## import dependencies
+import numpy as np
+import pandas as pd
+
+## deep learning dependencies
+'''
+In case you are using python version > 3.6
+you should import model dependencies from
+tensorflow directly instead of keras
+eg. from tensorflow.keras.optimizers import *
+'''
+from sklearn.preprocessing import MinMaxScaler
+from keras.models import Sequential
+from keras.layers import *
+from keras.optimizers import *
+
+## QuestDB dependencies
+import io
+import requests
+import urllib.parse as par
+
+## timestamp dependencies
+from datetime import datetime
+
+## visualisation dependencies
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+### Reading the Data Set
+
+Once you have imported all the computation, deep learning, and visualization
+dependencies, you can go ahead and read the data set:
+
+```
+# read dataset using pandas library
+df = pd.read_excel('Excelrates.xlsx')
+## check first few rows of the dataset
+df.head()
+```
+
+Since the data set that you want to read is an Excel file, you will have to use
+the `read_excel()` function provided by the [pandas](https://pandas.pydata.org/)
+library. Once the data set is read, you can check its first few rows with the
+help of the `head()` function. Your data set should look something like this:
+
+![Data](https://i.imgur.com/KJ6o2m7.png)
+
+### Creating QuestDB Tables
+
+Now you’ve seen your data set, but Excel is limited in its ability to store
+large amounts of data. Thus, you’ll use QuestDB to store the time series data
+instead. To do so, first make sure the QuestDB Docker container is running and
+accessible:
+
+```
+## create table query
+q = 'create table excel_rates'\
+	'(Date timestamp,'\
+	'USD int,'\
+	'INR double)'
+## connect to QuestDB URL and execute the query
+r = requests.get("http://localhost:9000/exec?query=" + q)
+
+## print the status code once executed the table creation query
+print(r.status_code)
+```
+
+Creating a table in QuestDB involves the same process as creating the table in
+any other database like SQL, Oracle, NoSQL, etc. Simply provide the table name,
+column names, and their respective data types. Then, connect to the port where
+QuestDB is running (in this case, port 9000) and execute the query using the
+request module of Python. If the query execution is successful, it will return
+the status code **200**; if not, you will receive the status code **400**.
+
+### Inserting the Data to QuestDB
+
+Once you have created the table, you need to store your data in it. Use the
+following code to do so:
+
+```
+## variables for tracking successful execution of queries
+success = 0
+fail = 0
+
+## iterate over each row and store it in the QuestDB table
+for i, row in df.iterrows():
+	date = row['Date']
+	## convert date to datetime format to store in DB
+	date = "'"+date.strftime('%Y-%m-%dT%H:%M:%S.%fZ')+"'"
+	usd = row['USD']
+	inr = row['INR']
+	query = "insert into excel_rates values(" + date + "," + str(usd) + ","  + str(inr) +")"
+	r = requests.get("http://localhost:9000/exec?query=" + query)
+	if r.status_code == 200:
+    	success += 1
+	else:
+    	fail += 1
+
+## check if the execution is successful or not
+if fail > 0:
+	print("Rows Failed: " + str(fail))
+if success > 0:
+	print("Rows inserted: " + str(success))
+```
+
+To store data in QuestDB tables, you need to use the **insert** query. As shown
+above, iterate over each row in the data frame and insert the Date, USD, and INR
+columns in the database. If all the rows are inserted successfully, you will
+receive code **200**; if any of them fails, you’ll get code **400**.
+
+**Note:** error code 400 may be returned due to a data type mismatch. For
+DateTime, make sure your date is enclosed in single quotes.
+
+### Selecting the Data from QuestDB
+
+Now your data is stored in the QuestDB time series database. However, storing
+the data is not enough; you need to be able to access it in order to do the time
+series forecasting. Use this code to access the data in QuestDB:
+
+```
+## select data from QuestDB
+r = requests.get("http://localhost:9000/exp?query=select * from excel_rates")
+rawData = r.text
+
+## convert Bytes to CSV format and read using pandas library
+df = pd.read_csv(io.StringIO(rawData), parse_dates=['Date'])
+df.columns
+```
+
+Here, in order to retrieve the data from QuestDB, you need to use the `select`
+query. The output of the select query is a byte array that represents the data.
+Once the data is retrieved, you can read it using the pandas `read_csv()`
+function.
+
+### Preprocessing the Data
+
+At this point in the tutorial, you’ve created the table, inserted data into the
+table, and read the data from the table. Now, it’s time to do some time series
+forecasting preprocessing.
+
+First, you can go ahead and remove the USD column, as it contains all '1'
+values, and as such, it will not contribute to the forecasting in any way. To do
+so, use the following code:
+
+```
+## drop USD column from the dataframe
+df = df.drop('USD', axis=1)
+## convert Date column to datetime format
+df['Date'] = pd.to_datetime(df["Date"])
+## set Date as index
+indexed_df = df.set_index(["Date"], drop=True)
+indexed_df.head()
+```
+
+You should now see the DataFrame as follows:
+
+![Data](https://i.imgur.com/5gj9geY.png)
+
+To see how the value of INR is varying according to time, you can plot a curve
+between time and INR using this code:
+
+```
+## plot dataframe
+indexed_df.plot()
+```
+
+The plot should look something like this:
+
+![All data set values](https://i.imgur.com/92g0Tuc.png)
+
+As you can see, the values prior to 2009 all appear as “0.” Because this can
+affect the accuracy of the model, go ahead and remove them. Thankfully, there
+are plenty of non-zero values after 2009 included in the data set. Use the
+following code to remove the '0' values:
+
+```
+## remove 0 values
+indexed_df = indexed_df[indexed_df.INR != 0.0]
+```
+
+After removing the '0' values, you will have to flip the data frame to sort it
+from 2009 to 2022:
+
+```
+indexed_df = indexed_df.iloc[::-1]
+```
+
+Time series forecasting is a supervised approach, which means it uses input
+features and labels to do forecasting. As of now, you only have Date as an index
+and a column (INR) as a feature. To create the label, you need to shift each INR
+value by 1 so that INR becomes the input feature, while the shifted values would
+be the output feature/label. You’ll also need to remove the NaN values from the
+columns to make them suitable for training. Use the following code to do all of
+this:
+
+```
+## shift INR values by 1
+shifted_df= indexed_df.shift()
+## merge INR and Shifter INR values
+concat_df = [indexed_df, shifted_df]
+data = pd.concat(concat_df,axis=1)
+## Replace NaNs with 0
+data.fillna(0, inplace=True)
+data.head()
+```
+
+Once complete, your data set should look like this:
+
+![Preprocessed data](https://i.imgur.com/PvK2vkT.png)
+
+Next, you need to split the data into two different categories—train and test:
+
+```
+## convert data to numpy array
+data = np.array(data)
+## you can take last 500 data points as test set
+train , test = data[0:-500], data[-500:]
+```
+
+Since there is diversity in the data (values are varying at a large scale), you
+need to apply some scaling or normalization to the data. For this purpose, you
+will be using **MinMaxScaler**:
+
+```
+## Scale
+scaler = MinMaxScaler()
+train_scaled = scaler.fit_transform(train)
+test_scaled = scaler.transform(test)
+
+## train data
+y_train = train_scaled[:,-1]
+X_train = train_scaled[:,0:-1]
+X_train = X_train.reshape(len(X_train),1,1)
+
+## test data
+y_test = test_scaled[:,-1]
+X_test = test_scaled[:,0:-1]
+```
+
+### Creating the Model
+
+Now, the preprocessing is complete, and it’s time to train your deep learning
+(GRU) model for time series forecasting. Use this code to do so:
+
+```
+## GRU Model
+model = Sequential()
+## GRU layer
+model.add(GRU(75, input_shape=(1,1)))
+## output layer
+model.add(Dense(1))
+optimizer = Adam(lr=1e-3)
+model.compile(loss='mean_squared_error', optimizer=optimizer, metrics=['accuracy'])
+model.fit(X_train, y_train, epochs=100, batch_size=20, shuffle=False)
+```
+
+Above, you defined your model as sequential—meaning that any layer that you are
+going to append later will be sequentially added to the previous one. Then, a
+GRU layer was defined with seventy-five neurons, and a dense (fully connected)
+layer was added that works as an output layer. Since you’re creating a deep
+learning model, you also added an
+[optimizer](https://towardsdatascience.com/optimizers-for-training-neural-network-59450d71caf6)
+and a
+[loss function](https://machinelearningmastery.com/loss-and-loss-functions-for-training-deep-learning-neural-networks/).
+In this case, **“Adam”** works well for GRU, and since you’re dealing with
+numerical data, **mean_squared_error** will do the trick. Finally, the model was
+fitted on the input data.
+
+Once you execute the above code, your model training will start. It should look
+something like this:
+
+![Model training](https://i.imgur.com/TIa2JvV.png)
+
+Once the model is ready, you’ll need to test it on the test set to check its
+accuracy:
+
+```
+## make predictions for test set
+X_test = X_test.reshape(500,1,1)
+y_pred = model.predict(X_test)
+
+## visualise results
+plt.plot(y_pred, label = 'predictions')
+plt.plot(y_test, label = 'actual')
+plt.legend()
+```
+
+The graphs displaying actual labels and predicted labels should look like this:
+
+![Model testing](https://i.imgur.com/efLrjg1.png)
+
+As you can see, the predictions are the approximation of actual values, which
+indicates that the model is performing well enough. Since the testing data has a
+lot of points, the graph appears clustered; to take a closer look at the values,
+you can visualize just one hundred values as well:
+
+```
+## visualize results
+plt.plot(y_pred[:100], label = 'predictions')
+plt.plot(y_test[:100], label = 'actual')
+plt.legend()
+```
+
+The simplified plot showing only one hundred actual and predicted values would
+be something like this:
+
+![Model testing](https://i.imgur.com/zVUs7fL.png)
+
+Now, your time series forecasting model is ready, and you can use it to make
+predictions for upcoming dates. The code notebook for the full project can be
+found
+[here](https://github.com/gouravsinghbais/Time-Series-Forecasting-with-Tensorflow-and-QuestDB).
+
+## Conclusion
+
+In this article, you learned how to do time series forecasting using deep
+learning (TensorFlow) and QuestDB. As more and more electronic and mechanical
+devices are becoming smart nowadays, handling them manually is ceasing to be an
+option. In order to efficiently automate the maintenance of these machines, you
+need to have the right devices and algorithms in place. Each device uses
+different IoT devices and sensors that continuously monitor the machines and
+store the generated data. Then, multiple algorithms (especially time series
+algorithms) are applied to this data to check for unexpected behavior in the
+operations of these machines.
+
+Traditional databases are not a good option for this, as they are more focused
+on transaction processing and writing data into the database as it occurs. Time
+series databases, on the other hand, are specially designed for this, as they
+store data in batches for many different reasons, as you have seen in this
+article. One great option to consider is [QuestDB](https://questdb.io/). Using
+QuestDB with the deep learning algorithms you’ve learned about in this tutorial,
+you can easily analyze any amount of data and make useful predictions.
