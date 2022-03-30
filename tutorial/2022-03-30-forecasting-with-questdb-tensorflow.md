@@ -19,7 +19,6 @@ import Banner from "@theme/Banner"
   width={650}
 ></Banner>
 
-
 This post comes
 [Gourav Singh Bais](https://www.linkedin.com/in/gourav-singh-bais/), who has
 written an excellent tutorial that shows how to build an application that uses
@@ -74,8 +73,8 @@ Let’s consider a few use cases:
   doctor can be notified.
 
 - **IoT data:**
-  [internet of things](oracle.com/in/internet-of-things/what-is-iot/) is now
-  becoming a concrete pillar of our economy. IoT devices have the ability to
+  [internet of things](https://oracle.com/in/internet-of-things/what-is-iot/) is
+  now becoming a concrete pillar of our economy. IoT devices have the ability to
   store data on a timely basis and communicate it across other devices for
   analysis and forecasting. One example of this is temperature prediction, in
   which different IoT devices are used to regularly store temperature data,
