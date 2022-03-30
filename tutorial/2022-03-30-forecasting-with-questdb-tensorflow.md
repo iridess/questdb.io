@@ -10,14 +10,21 @@ image: /img/tutorial/2022-03-30/banner.png
 featureType: resource
 ---
 
-<Banner alt="Grafana logo, QuestDB logo, Bitcoin logo" height={467}
-src="/img/tutorial/2022-03-30/banner.png" width={650}>
+import Banner from "@theme/Banner"
 
-</Banner>
+<Banner
+  alt="QuestDB log and Tensorflow logo"
+  height={467}
+  src="/img/tutorial/2022-03-30/banner.png"
+  width={650}
+></Banner>
 
-This post comes Gourav Singh Bais, who has written an excellent tutorial that
-shows how to build an application that uses time series data to forecast trends
-and events using Tensorflow and QuestDB. Thanks for the submission!
+
+This post comes
+[Gourav Singh Bais](https://www.linkedin.com/in/gourav-singh-bais/), who has
+written an excellent tutorial that shows how to build an application that uses
+time series data to forecast trends and events using Tensorflow and QuestDB.
+Thanks for the submission!
 
 ## Machine Learning for Timeseries Forecasting
 
