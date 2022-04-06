@@ -61,7 +61,7 @@ SELECT * FROM <table> WHERE <column> = NULL;
 SELECT * FROM <table> WHERE <column> != NULL;
 ```
 
-Alternatively, use the equality operator aliases: 
+Alternatively (*from version 6.3*) use the equality operator aliases: 
 
 ```questdb-sql
 SELECT * FROM <table> WHERE <column> IS NULL;
