@@ -19,7 +19,7 @@ import Banner from "@theme/Banner"
   width={650}
 ></Banner>
 
-This post comes
+This post comes from
 [Gourav Singh Bais](https://www.linkedin.com/in/gourav-singh-bais/), who has
 written an excellent tutorial that shows how to build an application that uses
 time series data to forecast trends and events using Tensorflow and QuestDB.
@@ -27,12 +27,13 @@ Thanks for the submission!
 
 ## Machine Learning for Timeseries Forecasting
 
-Machine learning and deep learning are taking the world by storm, performing
-many tasks with human-like accuracy. In the medical field, there are now smart
-assistants that can check your health over time. In finance, there are tools
-that can predict the return on your investment with a reasonable degree of
-accuracy. In online marketing, there are product recommenders that suggest
-specific products and brands based on your purchase history.
+Machine learning and deep learning (which is a subset of machine learning) are
+taking the world by storm, performing many tasks with human-like accuracy. In
+the medical field, there are now smart assistants that can check your health
+over time. In finance, there are tools that can predict the return on your
+investment with a reasonable degree of accuracy. In online marketing, there are
+product recommenders that suggest specific products and brands based on your
+purchase history.
 
 In each of these fields, a different type of data is used to train machine
 learning models. You may have numerical data for predicting housing prices or
@@ -54,13 +55,13 @@ Let’s consider a few use cases:
 - **Predictive maintenance:** nowadays, IoT (internet of things), AI (artificial
   intelligence), and integrated systems are being embedded into electronic,
   mechanical, and other types of devices to make them smart (i.e., they can work
-  without or with only a low level of human interaction). These IoT devices keep
-  track of data over time, and artificial intelligence, of which time series
-  forecasting is a component, is used to analyze this data and make predictions
-  regarding the approximate time at which devices may need maintenance. The
-  “check engine” light in your car is a great example of this: your car’s
-  computer continuously monitors the engine, and if it finds any suspicious
-  signals, it alerts you for repairs.
+  without or with only a low level of human interaction). These IoT devices have
+  sensors to keep track of relevant values over time; and artificial
+  intelligence, of which time series forecasting is a component, is used to
+  analyze this data and make predictions regarding the approximate time at which
+  devices may need maintenance. The “check engine” light in your car is a great
+  example of this: your car’s computer continuously monitors the engine, and if
+  it finds any suspicious signals, it alerts you for repairs.
 
 - **Anomaly detection:** _anomaly detection_ is the process of detecting the
   rare events and observations in the functionality of systems. Identifying
@@ -101,20 +102,20 @@ series data to forecast trends and events using
 
 ## TensorFlow and QuestDB
 
-Time series forecasting can be carried out with two different types of
-algorithms: machine learning and deep learning. _Machine learning_ uses methods
-like
+Time series forecasting can be carried out in different ways, including using
+various of machine learning algorithms like
 [ARIMA](https://machinelearningmastery.com/arima-for-time-series-forecasting-with-python/),
 [ETS](https://ai.plainenglish.io/time-series-decomposition-ets-model-using-python-4d2cd04bab77),
+[Simple Exponential Smoothing](https://machinelearningmastery.com/exponential-smoothing-for-time-series-forecasting-in-python/#:~:text=Single%20Exponential%20Smoothing%2C%20SES%20for,smoothing%20factor%20or%20smoothing%20coefficient.),
 and
-[Simple Exponential Smoothing](https://machinelearningmastery.com/exponential-smoothing-for-time-series-forecasting-in-python/#:~:text=Single%20Exponential%20Smoothing%2C%20SES%20for,smoothing%20factor%20or%20smoothing%20coefficient.)
-for forecasting, while _deep learning_ uses neural networks such as
-[Recurrent Neural Network (RNN)](https://towardsdatascience.com/temporal-loops-intro-to-recurrent-neural-networks-for-time-series-forecasting-in-python-b0398963dc1f),
-which has a few variations itself (e.g.,
+[Recurrent Neural Network (RNN)](https://towardsdatascience.com/temporal-loops-intro-to-recurrent-neural-networks-for-time-series-forecasting-in-python-b0398963dc1f).
+The RNN is a deep learning method with multiple variations itself such as
 [LSTM](https://machinelearningmastery.com/time-series-prediction-lstm-recurrent-neural-networks-python-keras/)
 and
-[GRU](https://towardsdatascience.com/predictive-analytics-time-series-forecasting-with-gru-and-bilstm-in-tensorflow-87588c852915)),
-depending on the type of data being used. Implementing these deep learning
+[GRU](https://towardsdatascience.com/predictive-analytics-time-series-forecasting-with-gru-and-bilstm-in-tensorflow-87588c852915).
+These RNNs have feedback loops between the layers of the neural network. This
+makes them ideal choices for timeseries forecasting as the network can
+‘remember’ for previous data. The implementation of these deep learning
 algorithms is made easier with the use of Google’s
 [TensorFlow](https://www.tensorflow.org/) library, which supports all kinds of
 neural networks and deep learning algorithms.
@@ -126,14 +127,9 @@ replaced by new entries, which can create issues for analysis. Enter **Time
 Series Databases** (TSDBs), which are suitable storage options where data needs
 to be appended in batches rather than in regular updates. They provide
 [a lot more features](https://questdb.io/blog/2020/11/26/why-timeseries-data/)
-for storing time series data as compared to traditional databases. One choice
-for the TSDB is [_QuestDB_](https://questdb.io/), an open source time series
-database with a focus on fast performance and ease of use. Some factors that
-make QuestDB a better choice over other TSDBs include the following:
-
-- It reduces hardware and development costs.
-- It is cloud-native.
-- It is an on-premises database.
+for storing time series data as compared to traditional databases. For this
+tutorial, my choice of TSDBs is [_QuestDB_](https://questdb.io/), an open source
+time series database with a focus on fast performance and ease of use.
 
 ## Implementing Predictive Data Analysis
 
@@ -145,9 +141,9 @@ exchange rate of USD to the INR data set, which you can download
 format. Make sure you select the time span between 1999-2022. This data set
 contains three columns:
 
-1. **Date:** time component according to which other components vary.
-2. **USD:** price of USD at a specific date.
-3. **INR:** price of INR concerning both USD and Date columns.
+1. **Date:** time component that represents date of exchange rate.
+2. **USD:** price of USD in USD (constant 1.0).
+3. **INR:** price of USD in INR on the specific date.
 
 As you have read, there are many different options for time series forecasting
 (e.g., ARIMA, ETS, Simple Exponential Smoothing, RNNs, LSTMs, GRUs, etc.). This
@@ -256,7 +252,7 @@ the `read_excel()` function provided by the [pandas](https://pandas.pydata.org/)
 library. Once the data set is read, you can check its first few rows with the
 help of the `head()` function. Your data set should look something like this:
 
-![Data](https://i.imgur.com/KJ6o2m7.png)
+![Data](/img/tutorial/2022-03-28/read-dataset.png)
 
 ### Creating QuestDB Tables
 
@@ -526,20 +522,19 @@ found
 
 ## Conclusion
 
-In this article, you learned how to do time series forecasting using deep
-learning (TensorFlow) and QuestDB. As more and more electronic and mechanical
-devices are becoming smart nowadays, handling them manually is ceasing to be an
-option. In order to efficiently automate the maintenance of these machines, you
-need to have the right devices and algorithms in place. Each device uses
-different IoT devices and sensors that continuously monitor the machines and
-store the generated data. Then, multiple algorithms (especially time series
-algorithms) are applied to this data to check for unexpected behavior in the
-operations of these machines.
+In this tutorial, you learned how to do time series forecasting using deep
+learning framework, TensorFlow, and QuestDB. As more and more electronic and
+mechanical devices are becoming smart nowadays, handling them manually is
+ceasing to be an option. To efficiently automate the maintenance of these
+machines, you need to have the right tools in place to store and process machine
+generated data.
 
 Traditional databases are not a good option for this, as they are more focused
-on transaction processing and writing data into the database as it occurs. Time
-series databases, on the other hand, are specially designed for this, as they
-store data in batches for many different reasons, as you have seen in this
-article. One great option to consider is [QuestDB](https://questdb.io/). Using
-QuestDB with the deep learning algorithms you’ve learned about in this tutorial,
-you can easily analyze any amount of data and make useful predictions.
+on processing and writing data in transactions. Time series databases, on the
+other hand, are specially designed for storing observations at different time
+intervals. They also provide features and tools to help processing time series,
+as you have seen in this tutorial.
+
+If you like this content, we'd love to know your thoughts! Feel free to
+[get started by visiting our GitHub](https://github.com/questdb/questdb#try-questdb)
+and share your feedback or come and say hello in the QuestDB Community Slack.
