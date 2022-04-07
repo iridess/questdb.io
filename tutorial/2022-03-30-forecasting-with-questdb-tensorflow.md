@@ -252,7 +252,7 @@ the `read_excel()` function provided by the [pandas](https://pandas.pydata.org/)
 library. Once the data set is read, you can check its first few rows with the
 help of the `head()` function. Your data set should look something like this:
 
-![Data](/img/tutorial/2022-03-28/read-dataset.png)
+![Data](/img/tutorial/2022-03-30/read-dataset.png)
 
 ### Creating QuestDB Tables
 
