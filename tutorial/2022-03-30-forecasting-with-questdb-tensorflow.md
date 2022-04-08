@@ -252,7 +252,10 @@ the `read_excel()` function provided by the [pandas](https://pandas.pydata.org/)
 library. Once the data set is read, you can check its first few rows with the
 help of the `head()` function. Your data set should look something like this:
 
-![Data](/img/tutorial/2022-03-30/read-dataset.png)
+![Read 
+
+
+Dataset](/img/tutorial/2022-03-30/read-dataset.png)
 
 ### Creating QuestDB Tables
 
@@ -363,7 +366,7 @@ indexed_df.head()
 
 You should now see the DataFrame as follows:
 
-![Data](https://i.imgur.com/5gj9geY.png)
+![Data](/img/tutorial/2022-03-30/data.png)
 
 To see how the value of INR is varying according to time, you can plot a curve
 between time and INR using this code:
@@ -375,7 +378,7 @@ indexed_df.plot()
 
 The plot should look something like this:
 
-![All data set values](https://i.imgur.com/92g0Tuc.png)
+![All data set values](/img/tutorial/2022-03-30/plot-all-values.png)
 
 As you can see, the values prior to 2009 all appear as “0.” Because this can
 affect the accuracy of the model, go ahead and remove them. Thankfully, there
@@ -415,7 +418,7 @@ data.head()
 
 Once complete, your data set should look like this:
 
-![Preprocessed data](https://i.imgur.com/PvK2vkT.png)
+![Preprocessed data](/img/tutorial/2022-03-30/processed-data.png)
 
 Next, you need to split the data into two different categories—train and test:
 
@@ -478,7 +481,7 @@ fitted on the input data.
 Once you execute the above code, your model training will start. It should look
 something like this:
 
-![Model training](https://i.imgur.com/TIa2JvV.png)
+![Model training](/img/tutorial/2022-03-30/model-training.png)
 
 Once the model is ready, you’ll need to test it on the test set to check its
 accuracy:
@@ -496,7 +499,7 @@ plt.legend()
 
 The graphs displaying actual labels and predicted labels should look like this:
 
-![Model testing](https://i.imgur.com/efLrjg1.png)
+![Model testing](/img/tutorial/2022-03-30/model-testing-1.png)
 
 As you can see, the predictions are the approximation of actual values, which
 indicates that the model is performing well enough. Since the testing data has a
@@ -513,7 +516,7 @@ plt.legend()
 The simplified plot showing only one hundred actual and predicted values would
 be something like this:
 
-![Model testing](https://i.imgur.com/zVUs7fL.png)
+![Model testing](img/tutorial/2022-03-30/model-testing-2.png)
 
 Now, your time series forecasting model is ready, and you can use it to make
 predictions for upcoming dates. The code notebook for the full project can be
