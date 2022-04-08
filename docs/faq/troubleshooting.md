@@ -15,10 +15,10 @@ immediately after being received. Refer to
 [InfluxDB line protocol](/docs/reference/api/ilp/tcp-receiver/#commit-strategy)
 guide to understand these rules.
 
-## How do I update or delete a row?
+## How do I delete a row?
 
-`UPDATE` and `DELETE` statements will be included in the next QuestDB versions,
-but for now, they are not supported yet. There are some ways to delete rows:
+`DELETE` statement will be included in the next QuestDB versions,
+but for now, it is not supported yet. There are some ways to delete rows:
 
 - In case if you want to delete all older rows, you could drop the whole
   partition with the `ALTER TABLE DROP PARTITION`
@@ -36,9 +36,6 @@ CREATE TABLE mytable_copy AS (
 DROP TABLE mytable;
 RENAME table mytable_copy TO mytable;
 ```
-
-A similar approach with a table copy may be used to in order to update table
-rows.
 
 ## Why do I get `table busy` error messages when inserting data over PostgreSQL wire protocol?
 

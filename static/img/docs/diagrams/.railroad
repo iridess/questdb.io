@@ -54,7 +54,7 @@ CreateTableTimestamp
   ::= 'CREATE' someCreateTableStatement 'timestamp' '(' columnName ')'
 
 createTableWithParams
-         ::= 'WITH' 'maxUncommittedRows' '=' rowCount ',' 'commitLag' '=' n ( 'us' | 's' | 'm' | 'h' | 'd' )
+  ::= 'WITH' 'maxUncommittedRows' '=' rowCount ',' 'commitLag' '=' n ( 'us' | 's' | 'm' | 'h' | 'd' )
 
 dynamicTimestamp
   ::= 'SELECT' someSelectStatement 'timestamp' '(' columnName ')'
@@ -166,3 +166,7 @@ setParam
 
 VacuumQuery
  ::= 'VACUUM' 'PARTITIONS' tableName
+
+Update
+ ::= UPDATE 'tableName' SET columnName '=' 'expression' ( ',' columnName '=' 'expression' )*
+ ( WHERE 'filter_expr' | FROM 'joinedTable' ( WHERE 'boolean_expr' )? )? ';'

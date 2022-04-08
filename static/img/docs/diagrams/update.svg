@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="275">
+        <defs>
+            <style type="text/css">
+                @namespace "http://www.w3.org/2000/svg";
+                .line                 {fill: none; stroke: #636273;}
+                .bold-line            {stroke: #636273; shape-rendering: crispEdges; stroke-width: 2; }
+                .thin-line            {stroke: #636273; shape-rendering: crispEdges}
+                .filled               {fill: #636273; stroke: none;}
+                text.terminal         {font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Cantarell, Helvetica, sans-serif;
+                font-size: 12px;
+                fill: #ffffff;
+                font-weight: bold;
+                }
+                text.nonterminal      {font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Cantarell, Helvetica, sans-serif;
+                font-size: 12px;
+                fill: #e289a4;
+                font-weight: normal;
+                }
+                text.regexp           {font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Cantarell, Helvetica, sans-serif;
+                font-size: 12px;
+                fill: #00141F;
+                font-weight: normal;
+                }
+                rect, circle, polygon {fill: none; stroke: none;}
+                rect.terminal         {fill: none; stroke: #be2f5b;}
+                rect.nonterminal      {fill: rgba(255,255,255,0.1); stroke: none;}
+                rect.text             {fill: none; stroke: none;}
+                polygon.regexp        {fill: #C7ECFF; stroke: #038cbc;}
+            </style>
+        </defs>
+    <polygon points="9 61 1 57 1 65"/>
+    <polygon points="17 61 9 57 9 65"/><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#UPDATE" xlink:title="UPDATE">
+    <rect x="31" y="47" width="68" height="32"/>
+    <rect x="29" y="45" width="68" height="32" class="nonterminal"/>
+    <text class="nonterminal" x="39" y="65">UPDATE</text></a><rect x="119" y="47" width="92" height="32" rx="10"/>
+    <rect x="117" y="45" width="92" height="32" class="terminal" rx="10"/>
+    <text class="terminal" x="127" y="65">tableName</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#SET" xlink:title="SET">
+    <rect x="231" y="47" width="42" height="32"/>
+    <rect x="229" y="45" width="42" height="32" class="nonterminal"/>
+    <text class="nonterminal" x="239" y="65">SET</text></a><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#columnName" xlink:title="columnName">
+    <rect x="313" y="47" width="102" height="32"/>
+    <rect x="311" y="45" width="102" height="32" class="nonterminal"/>
+    <text class="nonterminal" x="321" y="65">columnName</text></a><rect x="435" y="47" width="30" height="32" rx="10"/>
+    <rect x="433" y="45" width="30" height="32" class="terminal" rx="10"/>
+    <text class="terminal" x="443" y="65">=</text>
+    <rect x="485" y="47" width="92" height="32" rx="10"/>
+    <rect x="483" y="45" width="92" height="32" class="terminal" rx="10"/>
+    <text class="terminal" x="493" y="65">expression</text>
+    <rect x="313" y="3" width="24" height="32" rx="10"/>
+    <rect x="311" y="1" width="24" height="32" class="terminal" rx="10"/>
+    <text class="terminal" x="321" y="21">,</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#WHERE" xlink:title="WHERE">
+    <rect x="97" y="145" width="66" height="32"/>
+    <rect x="95" y="143" width="66" height="32" class="nonterminal"/>
+    <text class="nonterminal" x="105" y="163">WHERE</text></a><rect x="183" y="145" width="92" height="32" rx="10"/>
+    <rect x="181" y="143" width="92" height="32" class="terminal" rx="10"/>
+    <text class="terminal" x="191" y="163">filter_expr</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#FROM" xlink:title="FROM">
+    <rect x="97" y="189" width="54" height="32"/>
+    <rect x="95" y="187" width="54" height="32" class="nonterminal"/>
+    <text class="nonterminal" x="105" y="207">FROM</text></a><rect x="171" y="189" width="98" height="32" rx="10"/>
+    <rect x="169" y="187" width="98" height="32" class="terminal" rx="10"/>
+    <text class="terminal" x="179" y="207">joinedTable</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#WHERE" xlink:title="WHERE">
+    <rect x="309" y="221" width="66" height="32"/>
+    <rect x="307" y="219" width="66" height="32" class="nonterminal"/>
+    <text class="nonterminal" x="317" y="239">WHERE</text></a><rect x="395" y="221" width="112" height="32" rx="10"/>
+    <rect x="393" y="219" width="112" height="32" class="terminal" rx="10"/>
+    <text class="terminal" x="403" y="239">boolean_expr</text>
+    <rect x="567" y="113" width="24" height="32" rx="10"/>
+    <rect x="565" y="111" width="24" height="32" class="terminal" rx="10"/>
+    <text class="terminal" x="575" y="131">;</text>
+    <path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 61 h2 m0 0 h10 m68 0 h10 m0 0 h10 m92 0 h10 m0 0 h10 m42 0 h10 m20 0 h10 m102 0 h10 m0 0 h10 m30 0 h10 m0 0 h10 m92 0 h10 m-304 0 l20 0 m-1 0 q-9 0 -9 -10 l0 -24 q0 -10 10 -10 m284 44 l20 0 m-20 0 q10 0 10 -10 l0 -24 q0 -10 -10 -10 m-284 0 h10 m24 0 h10 m0 0 h240 m22 44 l2 0 m2 0 l2 0 m2 0 l2 0 m-564 66 l2 0 m2 0 l2 0 m2 0 l2 0 m22 0 h10 m0 0 h440 m-470 0 h20 m450 0 h20 m-490 0 q10 0 10 10 m470 0 q0 -10 10 -10 m-480 10 v12 m470 0 v-12 m-470 12 q0 10 10 10 m450 0 q10 0 10 -10 m-460 10 h10 m66 0 h10 m0 0 h10 m92 0 h10 m0 0 h252 m-460 -10 v20 m470 0 v-20 m-470 20 v24 m470 0 v-24 m-470 24 q0 10 10 10 m450 0 q10 0 10 -10 m-460 10 h10 m54 0 h10 m0 0 h10 m98 0 h10 m20 0 h10 m0 0 h208 m-238 0 h20 m218 0 h20 m-258 0 q10 0 10 10 m238 0 q0 -10 10 -10 m-248 10 v12 m238 0 v-12 m-238 12 q0 10 10 10 m218 0 q10 0 10 -10 m-228 10 h10 m66 0 h10 m0 0 h10 m112 0 h10 m40 -108 h10 m24 0 h10 m3 0 h-3"/>
+    <polygon points="609 127 617 123 617 131"/>
+    <polygon points="609 127 601 123 601 131"/>
+</svg>

@@ -187,6 +187,7 @@ module.exports = {
             "reference/sql/drop",
             "reference/sql/group-by",
             "reference/sql/insert",
+            "reference/sql/update",
             "reference/sql/join",
             "reference/sql/latest-on",
             "reference/sql/limit",
