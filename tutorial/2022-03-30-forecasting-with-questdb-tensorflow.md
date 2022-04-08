@@ -252,10 +252,7 @@ the `read_excel()` function provided by the [pandas](https://pandas.pydata.org/)
 library. Once the data set is read, you can check its first few rows with the
 help of the `head()` function. Your data set should look something like this:
 
-![Read 
-
-
-Dataset](/img/tutorial/2022-03-30/read-dataset.png)
+![Read Dataset](/img/tutorial/2022-03-30/read-dataset.png)
 
 ### Creating QuestDB Tables
 
@@ -516,7 +513,7 @@ plt.legend()
 The simplified plot showing only one hundred actual and predicted values would
 be something like this:
 
-![Model testing](img/tutorial/2022-03-30/model-testing-2.png)
+![Model testing](/img/tutorial/2022-03-30/model-testing-2.png)
 
 Now, your time series forecasting model is ready, and you can use it to make
 predictions for upcoming dates. The code notebook for the full project can be
