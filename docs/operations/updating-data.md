@@ -39,10 +39,18 @@ some part of the data updated but not others.
 The solution is to make the update **transactional** and **copy-on-write**. Basically
 a new column file is created when processing the UPDATE statement. All readers are
 looking at a previous consistent view of the data from an older column file while the
-UPDATE is in progress. Readers can find the latest committed version of the column files
+UPDATE is in progress. Readers can find the latest committed version of column files
 based on a table stored in a metadata file. When the update is completed and a new
-column version is available for the readers, the metadata gets updated as part of
-the commit. After the metadata change new SELECT queries will see the updated data.
+column version is available for the readers, this metadata gets updated as part of
+the commit. After the metadata change newly submitted SELECT queries will see the
+updated data.
+
+The copy-on-write approach gives us data consistency and good performance at a price,
+disk usage will increase. When sizing disk space we should account for extra storage
+to make sure UPDATE statements have enough headroom. Only those column files will get
+a new version where data is actually changing. For example, if only a single column
+is updated in a single partition of a table, then only a single column file will be
+rewritten.
 
 ## Limitations
 
