@@ -62,6 +62,7 @@ module.exports = {
         "develop/connect",
         "develop/insert-data",
         "develop/query-data",
+        "develop/update-data",
         "develop/authenticate",
       ],
     },
