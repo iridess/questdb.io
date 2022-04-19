@@ -7,11 +7,11 @@ description: Data types reference documentation.
 The type system is derived from Java types.
 
 | Type Name         | Storage bits | Nullable | Description                                                                                                                                                                                                                                                         |
-| ----------------- | ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ----------------- | ------------ |----------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `boolean`         | `1`          | No       | Boolean `true` or `false`.                                                                                                                                                                                                                                          |
 | `byte`            | `8`          | No       | Signed integer `-128` to `127`.                                                                                                                                                                                                                                     |
 | `short`           | `16`         | No       | Signed integer `-32768` to `32767`.                                                                                                                                                                                                                                 |
-| `char`            | `16`         | No       | `unicode` character.                                                                                                                                                                                                                                                |
+| `char`            | `16`         | Yes      | `unicode` character.                                                                                                                                                                                                                                                |
 | `int`             | `32`         | Yes      | Signed integer `0x80000000` to `0x7fffffff`.                                                                                                                                                                                                                        |
 | `float`           | `32`         | Yes      | Single precision IEEE 754 floating point value.                                                                                                                                                                                                                     |
 | `symbol`          | `32`         | Yes      | Symbols are stored as 32-bit signed indexes from symbol table. Each index will have a corresponding `string` value. Translation from index to string value is done automatically when data is being written or read. Symbol table is stored separately from column. |
@@ -45,6 +45,7 @@ Nullable types use a specific value to mark `NULL` values:
 | `date`           | `0x8000000000000000L` | Minimum possible value a `long` can take -2^63.                                                                        |
 | `timestamp`      | `0x8000000000000000L` | Minimum possible value a `long` can take -2^63.                                                                        |
 | `int`            | `0x80000000`          | Minimum possible value an `int` can take, -2^31.                                                                       |
+| `char`           | `0x0000`              | 0.                                                                                                                     |
 | `geohash(byte)`  | `0xff`                | Geohashes `from 1 up to included 7 bits`.                                                                              |
 | `geohash(short)` | `0xffff`              | Geohashes `from 8 up to included 15 bits`.                                                                             |
 | `geohash(int)`   | `0xffffffff`          | Geohashes `from 16 up to included 31 bits`.                                                                            |
@@ -61,7 +62,7 @@ SELECT * FROM <table> WHERE <column> = NULL;
 SELECT * FROM <table> WHERE <column> != NULL;
 ```
 
-Alternatively (*from version 6.3*) use the equality operator aliases: 
+Alternatively, from version 6.3 use the NULL equality operator aliases: 
 
 ```questdb-sql
 SELECT * FROM <table> WHERE <column> IS NULL;
