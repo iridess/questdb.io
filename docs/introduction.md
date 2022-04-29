@@ -85,16 +85,6 @@ utilities for collecting metrics and visualizing data:
 This section describes the architecture of QuestDB, how it stores and queries
 data, and introduces features and capabilities unique to the system.
 
-<<<<<<< HEAD
-- [Capacity planning](/docs/operations/capacity-planning/) for configuring
-  server settings and system resources for common scenarios and edge cases
-- [Data retention](/docs/operations/data-retention/) strategy to delete old data
-  and save disk space
-- [Health monitoring](/docs/operations/health-monitoring/) endpoint for
-  determining the status of the instance
-- [Backup and restore](/docs/operations/backup/) on how to perform database
-  backup and restore operations for the instance
-=======
 - [Storage model](/docs/concept/storage-model) describes how QuestDB stores
   records and partitions within tables
 - [Designated timestamp](/docs/concept/designated-timestamp) is a core feature
@@ -111,7 +101,6 @@ data, and introduces features and capabilities unique to the system.
 - [Geospatial data](/docs/concept/geohashes) with geohashes
 - [Root directory](/docs/concept/root-directory-structure) describes the
   directory contents of QuestDB for storage and configuration
->>>>>>> upstream/master
 
 ## Reference
 
