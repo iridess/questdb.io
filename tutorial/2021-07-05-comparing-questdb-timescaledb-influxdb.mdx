@@ -320,7 +320,7 @@ requirements without sacrificing performance. QuestDB (YC S20) is an open-source
 TSDB written in Java and C++ that now ranks in the top 15
 [although it launched less than a year ago](https://news.ycombinator.com/item?id=23975807).
 Underneath the hood,
-[QuestDB utilizes memory-mapped files](/docs/concept/storage-model/) to support
+[QuestDB utilizes memory-mapped files](/docs/concept/storage-model) to support
 fast read and writes before data is committed to disk.
 
 <Screenshot
@@ -346,18 +346,11 @@ focused on three things:
   domain-specific language like Flux.
 
 In terms of performance, QuestDB
-[recently posted a blog post showing benchmark results](/blog/2021/05/10/questdb-release-6-0-tsbs-benchmark/)
+[recently posted a blog post showing benchmark results](/blog/2021/05/10/questdb-release-6-0-tsbs-benchmark)
 that achieved write speeds up to 1.4 million rows per second. QuestDB team used
 the TSBS benchmark with the `cpu-only` use case using up to 14 works on
 `m5.8xlarge` instance on AWS (**NOTE:** the 1.4 million number is from using AMD
 Ryzen5 processor).
-
-<Screenshot
-  alt="A chart showing ingestion performance of InfluxDB, TimescaleDB, and ClickHouse versus QuestDB"
-  height={591}
-  src="/img/blog/2021-05-10/max-throughput-comparison.png"
-  width={770}
-/>
 
 For datasets with high cardinality (>10 million), QuestDB also outperformed
 other TSDBs with peak ingestion throughput of 904k rows/sec and sustaining about
@@ -368,7 +361,7 @@ QuestDB showed over a million rows/sec ingestion throughput.
 <Screenshot
   alt="A chart showing high-cardinality ingestion performance of InfluxDB, TimescaleDB, and ClickHouse versus QuestDB"
   height={591}
-  src="/img/blog/2021-06-16/maximum-throughput-by-device-scale-6-threads-ryzen.png"
+  src="/img/tutorial/2021-07-05/maximum-throughput.png"
   width={770}
 />
 

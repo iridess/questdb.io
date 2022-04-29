@@ -19,8 +19,32 @@
   to = "/get-questdb"
 
 [[redirects]]
+  from = "/docs/reference/web-console"
+  to = "/docs/develop/web-console"
+
+[[redirects]]
+  from = "/docs/develop/authenticate"
+  to = "/docs/reference/api/ilp/authenticate"
+
+[[redirects]]
   from = "/docs/reference/client/grafana"
   to = "/docs/third-party-tools/grafana"
+
+[[redirects]]
+    from = "/docs/guides/aws-official-ami"
+    to = "/docs/deployment/aws-official-ami"
+
+[[redirects]]
+    from = "/docs/guides/digitalocean"
+    to = "/docs/deployment/digitalocean"
+
+[[redirects]]
+    from = "/docs/guides/google-cloud-platform"
+    to = "/docs/deployment/google-cloud-platform"
+
+[[redirects]]
+    from = "/docs/guides/kubernetes"
+    to = "/docs/deployment/kubernetes"
 
 [[redirects]]
   from = "/blog/2020/12/10/building-a-garbage-free-network-stack-for-kafka-streams"
@@ -121,3 +145,24 @@
 [[redirects]]
   from = "/docs/faq/troubleshooting"
   to = "/docs/troubleshooting/faq"
+
+# Deleted pages, redirected to closest equivalent.
+[[redirects]]
+    from = "/docs/guides/aws-packer"
+    to = "/docs/deployment/aws-official-ami"
+
+[[redirects]]
+    from = "/docs/operations/deployment"
+    to = "/docs/deployment/aws-official-ami"
+
+[[redirects]]
+    from = "/blog/2022/04/12/query-live-crypto-trades-with-sql-in-real-time"
+    to = "/blog/2022/04/12/demo-live-crypto-data-streamed-with-questdb-and-grafana"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "0"
+    X-Content-Type-Options = "nosniff"
+    Content-Security-Policy = "frame-src 'self' app.netlify.com *.questdb.io;"

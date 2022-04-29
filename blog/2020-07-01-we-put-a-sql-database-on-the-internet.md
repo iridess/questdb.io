@@ -123,7 +123,7 @@ It was not disappointing!
 >
 > [6] https://github.com/questdb/questdb/blob/master/core/src/main
 >
-> [7] https://questdb.io/blog/2020/03/15/interthread
+> [7] https://questdb.io/blog/2021/11/03/interthread/
 >
 > [8] https://github.com/questdb/questdb
 
@@ -224,4 +224,4 @@ Want to try it yourself? You've read this far, you really should! got to
 
 We'd love to have you join us on our [community Slack]({@slackUrl@}) channel,
 give us a [star](https://github.com/questdb/questdb) on GitHub, and
-[download](/get-questdb/) and try it yourself!
+[download](/get-questdb) and try it yourself!
