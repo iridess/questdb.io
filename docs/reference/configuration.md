@@ -320,7 +320,7 @@ QuestDB.
 | cairo.sql.double.cast.scale                    | 12                | Maximum number of decimal places that types cast as doubles have.                                                                                                                                                        |
 | cairo.sql.float.cast.scale                     | 4                 | Maximum number of decimal places that types cast as floats have.                                                                                                                                                         |
 | cairo.sql.copy.formats.file                    | /text_loader.json | Name of file with user's set of date and timestamp formats.                                                                                                                                                              |
-| cairo.sql.jit.mode                             | off               | JIT compilation for SQL queries. May be enabled by setting this value to `scalar`.                                                                                                                                       |
+| cairo.sql.jit.mode                             | on                | JIT compilation for SQL queries. May be disabled by setting this value to `off`.                                                                                                                                         |
 | cairo.date.locale                              | en                | The locale to handle date types.                                                                                                                                                                                         |
 | cairo.timestamp.locale                         | en                | The locale to handle timestamp types.                                                                                                                                                                                    |
 | cairo.o3.column.memory.size                    | 16M               | Memory page size per column for O3 operations. Please be aware O3 will use 2x of this RAM per column.                                                                                                                    |
@@ -331,6 +331,20 @@ QuestDB.
 | cairo.writer.misc.append.page.size             | 4k                | mmap page size for mapping small files, default value is OS page size (4k Linux, 64K windows, 16k OSX M1). Overriding this rounds to the nearest (greater) multiple of the OS page size.                                 |
 | cairo.writer.data.index.key.append.page.size   | 512k              | mmap page size for appending index key data; key data is number of distinct symbol values times 4 bytes.                                                                                                                 |
 
+### Parallel SQL execution
+
+This section describes settings that can affect parallelism level of SQL
+execution and therefore performance.
+
+| Property                               | Default | Description                                                                                                                                                                |
+| -------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| cairo.sql.parallel.filter.enabled      | true    | Enable or disable parallel SQL filter execution. JIT compilation takes place only when this setting is enabled.                                                            |
+| cairo.page.frame.shard.count           | 4       | Number of shards for both dispatch and reduce queues. Shards reduce queue contention between SQL statements that are executed concurrently.                                |
+| cairo.page.frame.reduce.queue.capacity | 64      | Reduce queue is used for data processing and should be large enough to supply tasks for worker threads (shared worked pool).                                               |
+| cairo.page.frame.rowid.list.capacity   | 256     | Row ID list initial capacity for each slot of the reduce queue. Larger values reduce memory allocation rate, but increase minimal RSS size.                                |
+| cairo.page.frame.column.list.capacity  | 16      | Column list capacity for each slot of the reduce queue. Used by JIT-compiled filter functions. Larger values reduce memory allocation rate, but increase minimal RSS size. |
+| cairo.page.frame.task.pool.capacity    | 4       | Initial object pool capacity for local reduce tasks. These tasks are used to avoid blocking query execution when the reduce queue is full.                                 |
+
 ### Postgres wire protocol
 
 This section describes configuration settings for client connections using
@@ -340,7 +354,7 @@ PostgresSQL wire protocol.
 | -------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | pg.enabled                       | true         | Configuration for enabling or disabling the Postres interface.                                                                                                                                    |
 | pg.net.bind.to                   | 0.0.0.0:8812 | IP address and port of Postgres wire protocol server. 0 means that the server will bind to all network interfaces. You can specify IP address of any individual network interface on your system. |
-| pg.net.connection.limit          | 10           | The number of simultaneous PostgreSQL connections to the server. This value is intended to control server memory consumption.                                                                     |
+| pg.net.connection.limit          | 10           | The number of simultaneous Postgres connections to the server. This value is intended to control server memory consumption.                                                                       |
 | pg.net.connection.timeout        | 300000       | Connection idle timeout in milliseconds. Connections are closed by the server when this timeout lapses.                                                                                           |
 | pg.net.connection.rcvbuf         | -1           | Maximum send buffer size on each TCP socket. If value is -1 socket send buffer remains unchanged from OS default.                                                                                 |
 | pg.net.connection.sndbuf         | -1           | Maximum receive buffer size on each TCP socket. If value is -1, the socket receive buffer remains unchanged from OS default.                                                                      |
@@ -418,6 +432,21 @@ line protocol.
 | line.udp.timestamp           | n            | Input timestamp resolution. Possible values are `n`, `u`, `ms`, `s` and `h`.                                                                                                                                                     |
 | line.udp.commit.mode         | nosync       | Commit durability. Available values are `nosync`, `sync` and `async`.                                                                                                                                                            |
 
+### Config Validation
+
+The database startup phase checks for configuration issues, such as invalid or
+deprecated settings. Issues may be classified as advisories or errors.
+Advisory issues are [logged](/docs/concept/root-directory-structure#log-directory)
+without causing the database to stop its startup sequence: These are usually
+setting deprecation warnings.
+Configuration errors can optionally cause the database to fail its startup.
+
+| Property                 | Default | Description                                                    |
+|--------------------------|---------|----------------------------------------------------------------|
+| config.validation.strict | false   | When enabled, startup fails if there are configuration errors. |
+
+*We recommended enabling strict validation.*
+
 ### Telemetry
 
 QuestDB sends anonymous telemetry data with information about usage which helps
@@ -436,9 +465,9 @@ these methods.
 
 ### Configuration file
 
-Logs may be configured via a dedicated configuration file `log-stdout.conf`.
+Logs may be configured via a dedicated configuration file `log.conf`.
 
-```shell title="log-stdout.conf"
+```shell title="log.conf"
 # list of configured writers
 writers=file,stdout
 
@@ -452,8 +481,17 @@ w.stdout.class=io.questdb.log.LogConsoleWriter
 w.stdout.level=INFO,ERROR
 ```
 
-QuestDB will look for `/log-stdout.conf` on the classpath unless this name is
-overridden via a "system" property: `-Dout=/something_else.conf`.
+QuestDB will look for `/log.conf` first in `conf/` directory and then on the
+classpath unless this name is overridden via a command line property:
+`-Dout=/something_else.conf`. QuestDB will create `conf/log.conf` using default
+values If `-Dout` is not set and file doesn't exist .
+
+On Windows log messages go to depending on run mode :
+
+- interactive session - console and `$dataDir\log\stdout-%Y-%m-%dT%H-%M-%S.txt`
+  (default is `.\log\stdout-%Y-%m-%dT%H-%M-%S.txt` )
+- service - `$dataDir\log\service-%Y-%m-%dT%H-%M-%S.txt` (default is
+  `C:\Windows\System32\qdbroot\log\service-%Y-%m-%dT%H-%M-%S.txt` )
 
 ### Environment variables
 
